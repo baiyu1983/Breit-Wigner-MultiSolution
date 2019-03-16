@@ -1,6 +1,6 @@
-# Breit-Weigner-MultiSolution
+# Breit-Wigner-MultiSolution
 # author: Yu Bai(baiy@seu.edu.cn)
-# This program can be implemented to find all possible combination between Breit-Weigners and Polynomail background(Optionnal). You must indicate the input paramter of the resonance. 
+# This program can be implemented to find all possible combination between Breit-Wigners and Polynomail background(Optionnal). You must indicate the input paramter of the resonance. 
 0. Make sure python(https://www.python.org/downloads) and numpy(https://scipy.org/install.html) are installed.
 1. Write the resonance input file in the form that each line for each resonance. You need to specify the mass(GeV), width(GeV), fR(eV) and phase angle(rad). These variables are separated by command',' like:
      4.0,0.1,1.0,0.785
