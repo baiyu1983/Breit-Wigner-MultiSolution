@@ -160,7 +160,8 @@ def MultiSolution(bkginputfile='bkg.txt',bwinputfile='bw.txt',outputfile='output
     #         print tmpBKGCoeff
     #     print PhaseSpace/(Mass*Mass*Width)
    #      print np.power(tmpBWCoeff,2)
-         outputBWCoeff = 1000000000.0*(np.power(tmpBWCoeff,2))*PhaseSpace/(Mass*Mass*Width)
+   #      outputBWCoeff = 1000000000.0*(np.power(tmpBWCoeff,2))*PhaseSpace/(Mass*Mass*Width) //CAUSE BUG!
+         outputBWCoeff = np.sqrt(1000000000.0*PhaseSpace/Width)*tmpBWCoeff/Mass
          BKGCAeff_all[k]=tmpBKGCoeff
          BWCAeff_all[k]=outputBWCoeff
 
@@ -171,9 +172,9 @@ def MultiSolution(bkginputfile='bkg.txt',bwinputfile='bw.txt',outputfile='output
         print('Resoance'.center(20,' ')+'\t|'+'Mass'.center(30,' ')+'\t|'+'Width'.center(30,' ')+'\t|'+'fR'.center(30,' ')+'\t|'+'Phi'.center(30,' '))
         for i in range(0,BWCAeff_all[k].size):
             if BWCoeff.size == 1:
-                print(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass,Width,np.sqrt(BWCAeff_all[k].real*BWCAeff_all[k].real+BWCAeff_all[k].imag*BWCAeff_all[k].imag),np.angle(BWCAeff_all[k])))
+                print(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass,Width,BWCAeff_all[k].real*BWCAeff_all[k].real+BWCAeff_all[k].imag*BWCAeff_all[k].imag,np.angle(BWCAeff_all[k])))
             else:
-                print(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass[i],Width[i],np.sqrt(BWCAeff_all[k][i].real*BWCAeff_all[k][i].real+BWCAeff_all[k][i].imag*BWCAeff_all[k][i].imag),np.angle(BWCAeff_all[k][i])))
+                print(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass[i],Width[i],BWCAeff_all[k][i].real*BWCAeff_all[k][i].real+BWCAeff_all[k][i].imag*BWCAeff_all[k][i].imag,np.angle(BWCAeff_all[k][i])))
         print('-'.center(140,'-'))             
         
         print('s power'.center(30,' ')+'\t|'+'Coefficients'.center(60))
@@ -211,9 +212,9 @@ def MultiSolution(bkginputfile='bkg.txt',bwinputfile='bw.txt',outputfile='output
         print >> fout,('Resoance'.center(20,' ')+'\t|'+'Mass'.center(30,' ')+'\t|'+'Width'.center(30,' ')+'\t|'+'fR'.center(30,' ')+'\t|'+'Phi'.center(30,' '))
         for i in range(0,BWCAeff_all[k].size):
             if BWCoeff.size == 1:
-                print >> fout,(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass,Width,np.sqrt(BWCAeff_all[k].real*BWCAeff_all[k].real+BWCAeff_all[k].imag*BWCAeff_all[k].imag),np.angle(BWCAeff_all[k])))
+                print >> fout,(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass,Width,BWCAeff_all[k].real*BWCAeff_all[k].real+BWCAeff_all[k].imag*BWCAeff_all[k].imag,np.angle(BWCAeff_all[k])))
             else:
-                print >> fout,(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass[i],Width[i],np.sqrt(BWCAeff_all[k][i].real*BWCAeff_all[k][i].real+BWCAeff_all[k][i].imag*BWCAeff_all[k][i].imag),np.angle(BWCAeff_all[k][i])))
+                print >> fout,(('%i'.center(20,' ')+'\t|'+'%-.4f'.center(26)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24)+'\t|'+'%-.6f'.center(24))%(i+1,Mass[i],Width[i],BWCAeff_all[k][i].real*BWCAeff_all[k][i].real+BWCAeff_all[k][i].imag*BWCAeff_all[k][i].imag,np.angle(BWCAeff_all[k][i])))
         print >> fout,('-'.center(140,'-'))
 
         print >> fout,('s power'.center(30,' ')+'\t|'+'Coefficients'.center(60))
